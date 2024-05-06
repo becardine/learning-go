@@ -33,3 +33,8 @@
 - `src`: onde podem ser criados os projetos
 - `pkg`: onde ficam os pacotes compilados
 - `bin`: onde ficam os binários
+
+### Extensão VSCode
+
+- [Go](https://marketplace.visualstudio.com/items?itemName=golang.Go)
+- `Ctrl + Shift + P` > `Go: Install/Update Tools` > `all`
