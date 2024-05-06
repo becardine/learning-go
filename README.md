@@ -18,3 +18,18 @@
 - Foi criada para aproveitar ao máximo os processadores multi-core e de rede
 - Compilada em apenas um arquivo binário, sem necessidade de instalar bibliotecas ou dependências.
 - Linguagem retrocompatível na versão 1, ou seja, programas escritos em versões anteriores da linguagem continuarão funcionando nas versões mais recentes.
+- Framework de testes e profiling nativos
+- Detecção de Race Conditions nativa
+- Deploy simples
+- Baixa curva de aprendizado
+
+### Instalação
+
+- [Download Go](https://golang.org/dl/)
+  - chocolatey: `choco install golang` (Windows)
+
+### Principais pastas `/user/go`
+
+- `src`: onde podem ser criados os projetos
+- `pkg`: onde ficam os pacotes compilados
+- `bin`: onde ficam os binários
