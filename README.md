@@ -38,3 +38,30 @@
 
 - [Go](https://marketplace.visualstudio.com/items?itemName=golang.Go)
 - `Ctrl + Shift + P` > `Go: Install/Update Tools` > `all`
+
+### Comandos
+
+- `go run main.go`: compila e executa o código
+- `go build main.go`: compila o código
+- `./main`: executa o binário
+- `go install`: compila e instala o binário no `$GOPATH/bin`
+- `go get`: baixa e instala pacotes e dependências
+- `go test`: executa testes
+- `go fmt`: formata o código
+- `go vet`: verifica erros no código
+- `go doc`: documentação
+- `go mod`: gerenciamento de dependências
+- `go clean`: remove arquivos gerados pelo build
+- `go env`: informações sobre o ambiente Go
+- `go version`: versão do Go
+- `go list`: lista pacotes
+- `go tool`: ferramentas auxiliares
+- `GOOS=linux GOARCH=amd64 go build main.go`: compila para Linux
+- `GOOS=windows GOARCH=amd64 go build main.go`: compila para Windows
+- `GOOS=darwin GOARCH=amd64 go build main.go`: compila para macOS
+
+### RUNTIME
+
+```
+go runtime + seu código = binário
+```
