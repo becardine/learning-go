@@ -24,6 +24,16 @@ func (client *Client) Deactivate() {
 	fmt.Println("Client deactivated")
 }
 
+// interfaces são tipos de dados que definem um conjunto de métodos, não pode conter propriedades (strigs, int, etc)
+// structs podem implementar interfaces
+type Person interface {
+	Deactivate()
+}
+
+func DeactivatePerson(person Person) {
+	person.Deactivate()
+}
+
 func main() {
 	// go não é uma linguagem orientada a objetos, mas é possível criar structs que se comportam de forma semelhante a classes
 	// structs são tipos de dados que podem conter campos de diferentes tipos
@@ -50,6 +60,9 @@ func main() {
 
 	fmt.Println(client) // {Maria 25 true {Rua 1 123 Brasil}}
 
-	client.Deactivate() // Client deactivated
-	fmt.Println(client) // {Maria 25 false {Rua 1 123 Brasil}}
+	// client.Deactivate() // Client deactivated
+	// fmt.Println(client) // {Maria 25 false {Rua 1 123 Brasil}}
+
+	DeactivatePerson(&client) // Client deactivated
+	fmt.Println(client)       // {Maria 25 false {Rua 1 123 Brasil}}
 }
