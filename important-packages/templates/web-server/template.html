@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Template External Files</title>
+	</head>
+	<body>
+		<h1>Courses</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Course</th>
+					<th>Duration</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{ range . }}
+				<tr>
+					<td>{{ .Name }}</td>
+					<td>{{ .Hours }}</td>
+				</tr>
+				{{ end }}
+			</tbody>
+		</table>
+	</body>
+</html>
