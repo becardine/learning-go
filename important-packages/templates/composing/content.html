@@ -1,0 +1,21 @@
+{{ template "header.html" }}
+<body>
+	<h1>Courses</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Course</th>
+				<th>Duration</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{ range . }}
+			<tr>
+				<td>{{ .Name | ToUpper }}</td>
+				<td>{{ .Hours }}</td>
+			</tr>
+			{{ end }}
+		</tbody>
+	</table>
+</body>
+{{ template "footer.html" }}
