@@ -50,6 +50,16 @@ func main() {
 	}
 	// %v is the default format, while %+v is used to print the struct fields
 	fmt.Printf("Product: %+v\n", p)
+
+	// Select all products
+	products, err := selectProducts(db)
+	if err != nil {
+		panic(err)
+	}
+
+	for _, p := range products {
+		fmt.Printf("Product: %+v\n", p)
+	}
 }
 
 func insertProduct(db *sql.DB, p *Product) error {
@@ -108,4 +118,36 @@ func selectProduct(db *sql.DB, id string) (*Product, error) {
 	}
 
 	return &p, nil
+}
+
+func selectProducts(db *sql.DB) ([]Product, error) {
+	// Prepare the statement to select all products
+	stmt, err := db.Prepare("SELECT id, name, price FROM products")
+	if err != nil {
+		return nil, err
+	}
+
+	defer stmt.Close()
+
+	// Execute the statement
+	rows, err := stmt.Query()
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	// Scan the results into a slice of products
+	var products []Product
+	for rows.Next() {
+		var p Product
+		err = rows.Scan(&p.ID, &p.Name, &p.Price)
+		if err != nil {
+			return nil, err
+		}
+
+		products = append(products, p)
+	}
+
+	return products, nil
 }
