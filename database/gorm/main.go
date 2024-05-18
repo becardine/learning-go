@@ -8,9 +8,25 @@ import (
 )
 
 type Product struct {
-	ID    string `gorm:"primary_key"`
-	Name  string
-	Price float64
+	ID           string `gorm:"primary_key"`
+	Name         string
+	Price        float64
+	CategoryID   string
+	Category     Category `gorm:"foreignKey:CategoryID"`
+	SerialNumber SerialNumber
+	gorm.Model   // Add fields `ID`, `CreatedAt`, `UpdatedAt`, `DeletedAt` to the model
+}
+
+type Category struct {
+	ID       string `gorm:"primary_key"`
+	Name     string
+	Products []Product
+}
+
+type SerialNumber struct {
+	ID        string `gorm:"primary_key"`
+	Number    string
+	ProductID string
 }
 
 func main() {
@@ -20,7 +36,7 @@ func main() {
 		panic(err)
 	}
 
-	db.AutoMigrate(&Product{})
+	db.AutoMigrate(&Product{}, &Category{}, &SerialNumber{})
 
 	// Create a new product
 	p := &Product{Name: "Product 1", Price: 9.99}
@@ -62,4 +78,38 @@ func main() {
 
 	// delete a product
 	db.Delete(&product)
+
+	// working with soft delete (deleted_at) need to add gorm.Model to the model
+	db.Delete(&product, 1)
+
+	// belongs to relationship
+	category := Category{Name: "Category 1"}
+	db.Create(&category)
+	product = Product{Name: "Product 4", Price: 49.99, CategoryID: category.ID}
+	db.Create(&product)
+
+	// select product with category
+	db.Preload("Category").Find(&product)
+
+	// has one relationship
+	serialNumber := SerialNumber{Number: "123456"}
+	db.Create(&serialNumber)
+	product = Product{Name: "Product 5", Price: 59.99, SerialNumber: serialNumber}
+	db.Create(&product)
+
+	// select product with serial number
+	db.Preload("SerialNumber").Find(&product)
+
+	// has many relationship
+	var categories []Category
+	err = db.Model(&Category{}).Preload("Products").Find(&categories).Error
+	if err != nil {
+		panic(err)
+	}
+	for _, c := range categories {
+		fmt.Println(c)
+		for _, p := range c.Products {
+			fmt.Println(p)
+		}
+	}
 }
