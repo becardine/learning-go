@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -30,4 +32,34 @@ func main() {
 		{Name: "Product 3", Price: 29.99},
 	}
 	db.Create(&products)
+
+	// read a product
+	var product Product
+	db.First(&product, 1)
+	fmt.Println(product)
+
+	// read a product by name
+	db.First(&product, "name = ?", "Product 2")
+
+	// read all products
+	var productsAll []Product
+	db.Find(&productsAll)
+	for _, p := range productsAll {
+		fmt.Println(p)
+	}
+
+	// read all products with limit and offset
+	db.Limit(2).Offset(1).Find(&productsAll)
+
+	// read all products with where clause
+	db.Where("price > ?", 20).Find(&productsAll)
+
+	// read all products with like clause
+	db.Where("name LIKE ?", "%Product%").Find(&productsAll)
+
+	// update a product
+	db.Model(&product).Update("Price", 39.99)
+
+	// delete a product
+	db.Delete(&product)
 }
