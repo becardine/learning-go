@@ -1,10 +1,16 @@
 package math
 
 type Math struct {
-	A int
-	B int
+	a int
+	b int
 }
 
+func NewMath(a, b int) Math {
+	return Math{a, b}
+}
+
+// when a method/struct starts with a lowercase letter, it is private
+// when a method/struct starts with an uppercase letter, it is public
 func (m *Math) Add() int {
-	return m.A + m.B
+	return m.a + m.b
 }
