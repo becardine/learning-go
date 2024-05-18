@@ -8,11 +8,12 @@ import (
 )
 
 type Product struct {
-	ID           string `gorm:"primary_key"`
-	Name         string
-	Price        float64
-	CategoryID   string
-	Category     Category `gorm:"foreignKey:CategoryID"`
+	ID         string `gorm:"primary_key"`
+	Name       string
+	Price      float64
+	CategoryID string
+	Category   Category `gorm:"foreignKey:CategoryID"`
+	// Categories   []Category `gorm:"many2many:product_categories;"` // many to many relationship
 	SerialNumber SerialNumber
 	gorm.Model   // Add fields `ID`, `CreatedAt`, `UpdatedAt`, `DeletedAt` to the model
 }
@@ -20,7 +21,7 @@ type Product struct {
 type Category struct {
 	ID       string `gorm:"primary_key"`
 	Name     string
-	Products []Product
+	Products []Product // `gorm:"many2many:product_categories;"`  many to many relationship
 }
 
 type SerialNumber struct {
@@ -115,5 +116,21 @@ func main() {
 			fmt.Println(p)
 		}
 	}
+
+	// many to many relationship
+	// db.Model(&product).Association("Categories").Append(&category)
+	// db.Model(&product).Association("Categories").Delete(&category)
+	// db.Model(&product).Association("Categories").Find(&categories)
+	// db.Model(&product).Association("Categories").Count()
+	// db.Model(&product).Association("Categories").Clear()
+	// db.Model(&product).Association("Categories").Replace(&category)
+	// db.Create(&Product{
+	// 	Name: "Product 6",
+	// 	Price: 69.99,
+	// 	Categories: []Category{
+	// 		{Name: "Category 2"},
+	// 		{Name: "Category 3"},
+	// 	},
+	// })
 
 }
