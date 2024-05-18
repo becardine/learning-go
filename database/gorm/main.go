@@ -101,8 +101,11 @@ func main() {
 	db.Preload("SerialNumber").Find(&product)
 
 	// has many relationship
+	// Products.SerialNumber will be populated with the serial number of each product in the category when it's loaded
 	var categories []Category
-	err = db.Model(&Category{}).Preload("Products").Find(&categories).Error
+	err = db.Model(&Category{}).Preload("Products").Preload("Products.SerialNumber").Find(&categories).Error
+	// alternatively, you can use the following code to load the products and serial numbers
+	// err = db.Model(&Category{}).Preload("Products.SerialNumber").Find(&categories).Error
 	if err != nil {
 		panic(err)
 	}
@@ -112,4 +115,5 @@ func main() {
 			fmt.Println(p)
 		}
 	}
+
 }
