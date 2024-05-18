@@ -5,6 +5,7 @@ import (
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type Product struct {
@@ -132,5 +133,23 @@ func main() {
 	// 		{Name: "Category 3"},
 	// 	},
 	// })
+
+	// lock for update (SELECT ... FOR UPDATE) - pessimistic lock
+	tx := db.Begin()
+	if tx.Error != nil {
+		panic(tx.Error)
+	}
+	var product1 Product
+	err = tx.Debug().Clauses(clause.Locking{Strength: "UPDATE"}).First(&product1, 1).Error
+	if err != nil {
+		panic(err)
+	}
+	product1.Price = 79.99
+	err = tx.Save(&product1).Error
+	if err != nil {
+		tx.Rollback()
+		panic(err)
+	}
+	tx.Commit()
 
 }
