@@ -47,6 +47,8 @@
 - `go install`: compila e instala o binário no `$GOPATH/bin`
 - `go get`: baixa e instala pacotes e dependências
 - `go test`: executa testes
+- `go test -v`: executa testes com verbose
+- `go test -cover`: executa testes com cobertura
 - `go fmt`: formata o código
 - `go vet`: verifica erros no código
 - `go doc`: documentação
@@ -63,7 +65,7 @@
 - `go mod tidy`: remove dependências não utilizadas ou adiciona dependências necessárias, alternativa ao `go get`
 - `go.sum`: arquivo que contém as dependências do projeto e suas versões exatas, através do hash SHA-256 de cada pacote e versão baixada do repositório de origem.
 - `go mod edit -replace github.com/username/repo@v1.0.0=github.com/username/repo@v1.1.0`: substitui uma dependência por outra (local pode ser usado para substituir um pacote remoto por um local, mas produção não é recomendado)
-- `go work init`: cria um módulo de trabalho
+- `go work init`: cria um módulo de trabalho (não é recomendado para projetos que serão compartilhados)
 
 ### RUNTIME
 
