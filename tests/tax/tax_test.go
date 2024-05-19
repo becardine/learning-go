@@ -28,3 +28,17 @@ func TestCalculateTaxBatch(t *testing.T) {
 		}
 	}
 }
+
+// benchmark tests are used to measure the performance of the code
+// go test -bench=. -run=^#
+func BenchmarkCalculateTax(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		CalculateTax(500.0)
+	}
+}
+
+func BenchmarkCalculateTax2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		CalculateTax2(500.0)
+	}
+}
