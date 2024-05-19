@@ -49,6 +49,8 @@
 - `go test`: executa testes
 - `go test -v`: executa testes com verbose
 - `go test -cover`: executa testes com cobertura
+- `go test -coverprofile=coverage.out`: gera um arquivo de cobertura
+- `go tool cover -html=coverage.out`: abre o arquivo de cobertura no navegador
 - `go fmt`: formata o código
 - `go vet`: verifica erros no código
 - `go doc`: documentação
