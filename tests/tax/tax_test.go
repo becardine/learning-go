@@ -42,3 +42,23 @@ func BenchmarkCalculateTax2(b *testing.B) {
 		CalculateTax2(500.0)
 	}
 }
+
+// fuzz tests are used to test the code with random inputs
+func FuzzCalculateTax(f *testing.F) {
+	seed := []float64{25, 45, 2.5, 500.0, 1000.0, 1500.0}
+	for _, amount := range seed {
+		f.Add(amount)
+	}
+
+	f.Fuzz(func(t *testing.T, amount float64) {
+		result := CalculateTax(amount)
+		if amount <= 0 && result != 0 {
+			t.Errorf("Expected 0, got %.2f", result)
+		}
+
+		if amount >= 20000 && result != 20 {
+			t.Errorf("Expected 20, got %.2f", result)
+		}
+	})
+
+}

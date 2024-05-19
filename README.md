@@ -52,6 +52,7 @@
 - `go test -coverprofile=coverage.out`: gera um arquivo de cobertura
 - `go tool cover -html=coverage.out`: abre o arquivo de cobertura no navegador
 - `go test -bench .`: executa testes de benchmark
+- `go test fuzz`: executa testes de fuzzing
 - `go fmt`: formata o código
 - `go vet`: verifica erros no código
 - `go doc`: documentação
