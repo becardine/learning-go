@@ -13,6 +13,7 @@ import (
 )
 
 func main() {
+
 	_, err := configs.LoadConfig(".")
 	if err != nil {
 		panic(err)
@@ -23,6 +24,11 @@ func main() {
 		panic(err)
 	}
 	db.AutoMigrate(&entity.User{}, &entity.Product{})
+
+	productDB := database.NewProduct(db)
+	productHandler := NewProduct(productDB)
+
+	http.HandleFunc("/products", productHandler.CreateProduct)
 
 	http.ListenAndServe(":8000", nil)
 }
