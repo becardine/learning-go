@@ -16,7 +16,7 @@ type ProductHandler struct {
 	ProductDB database.ProductInterface
 }
 
-func NewProduct(db database.ProductInterface) *ProductHandler {
+func NewProductHandler(db database.ProductInterface) *ProductHandler {
 	return &ProductHandler{
 		ProductDB: db,
 	}

@@ -12,7 +12,7 @@ type User struct {
 	Email    string    `json:"email"`
 }
 
-func NewUser(name, password, email string) (*User, error) {
+func NewUser(name, email, password string) (*User, error) {
 	// Hash the password before storing it
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
