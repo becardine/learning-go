@@ -37,6 +37,8 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Use((middleware.Logger))
+	// Recoverer middleware to recover from panics anywhere in the chain
+	r.Use(middleware.Recoverer)
 	// custom middleware to log requests
 	// r.Use(LogRequest)
 
