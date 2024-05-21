@@ -10,6 +10,7 @@ import (
 	"github.com/becardine/learning-go/apis/internal/infra/webserver/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/jwtauth"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -35,12 +36,21 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Use((middleware.Logger))
-	r.Post("/products", productHandler.CreateProduct)
-	r.Get("/products/{id}", productHandler.GetProduct)
-	r.Put("/products/{id}", productHandler.UpdateProduct)
-	r.Get("/products", productHandler.GetProducts)
-	r.Delete("/products/{id}", productHandler.DeleteProduct)
 
+	// Product routes
+	r.Route("/products", func(r chi.Router) {
+		// Protect the routes with JWT
+		r.Use(jwtauth.Verifier(configs.TokenAuth))
+		// Use the JWTAuth middleware to check the token validity
+		r.Use(jwtauth.Authenticator)
+		r.Post("/", productHandler.CreateProduct)
+		r.Get("/", productHandler.GetProducts)
+		r.Get("/{id}", productHandler.GetProduct)
+		r.Put("/id}", productHandler.UpdateProduct)
+		r.Delete("/{id}", productHandler.DeleteProduct)
+	})
+
+	// User routes
 	r.Post("/users", userHandler.CreateUser)
 	r.Post("/users/generate_token", userHandler.GetJWT)
 
