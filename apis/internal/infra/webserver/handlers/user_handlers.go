@@ -11,6 +11,10 @@ import (
 	"github.com/go-chi/jwtauth"
 )
 
+type ErrorHandler struct {
+	Message string `json:"message"`
+}
+
 type UserHandler struct {
 	UserDB       database.UserInterface
 	Jwt          *jwtauth.JWTAuth
@@ -25,6 +29,18 @@ func NewUserHandler(db database.UserInterface, jwt *jwtauth.JWTAuth, jwtExpiresI
 	}
 }
 
+// GetJWT godoc
+// @Summary Get JWT token
+// @Description Get JWT token with the input payload
+// @Tags users
+// @Accept  json
+// @Produce  json
+// @Param request body dto.GetJwtInput true "Get JWT Input"
+// @Success 200 {object} dto.GetJwtOutput
+// @Failure 400 {object} ErrorHandler
+// @Failure 401 {object} ErrorHandler
+// @Failure 404 {object} ErrorHandler
+// @Router /users/generate_token [post]
 func (h *UserHandler) GetJWT(w http.ResponseWriter, r *http.Request) {
 	var input dto.GetJwtInput
 	err := json.NewDecoder(r.Body).Decode(&input)
@@ -49,17 +65,24 @@ func (h *UserHandler) GetJWT(w http.ResponseWriter, r *http.Request) {
 		"exp": time.Now().Add(time.Second * time.Duration(h.JwtExpiresIn)).Unix(),
 	})
 
-	accessToken := struct {
-		AccessToken string `json:"access_token"`
-	}{
-		AccessToken: token,
-	}
+	accessToken := dto.GetJwtOutput{AccessToken: token}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(accessToken)
 }
 
+// Create User godoc
+// @Summary Create a new user
+// @Description Create a new user with the input payload
+// @Tags users
+// @Accept  json
+// @Produce  json
+// @Param request body dto.CreateUserInput true "Create User Input"
+// @Success 201
+// @Failure 400 {object} ErrorHandler
+// @Failure 500 {object} ErrorHandler
+// @Router /users [post]
 func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	var user dto.CreateUserInput
 	err := json.NewDecoder(r.Body).Decode(&user)
