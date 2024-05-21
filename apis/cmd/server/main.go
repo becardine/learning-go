@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/becardine/learning-go/apis/configs"
@@ -36,6 +37,8 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Use((middleware.Logger))
+	// custom middleware to log requests
+	// r.Use(LogRequest)
 
 	// Product routes
 	r.Route("/products", func(r chi.Router) {
@@ -55,4 +58,11 @@ func main() {
 	r.Post("/users/generate_token", userHandler.GetJWT)
 
 	http.ListenAndServe(":8080", r)
+}
+
+func LogRequest(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("Request: %s %s", r.Method, r.URL.Path)
+		next.ServeHTTP(w, r)
+	})
 }
