@@ -76,3 +76,9 @@
 ```
 go runtime + seu código = binário
 ```
+
+### Multithreading
+
+- Go Routines (Goroutines): funções que são executadas de forma concorrente
+- Rodar simultaneamente em um único processo (thread)
+- Utiliza a função `go` para criar uma goroutine
