@@ -86,3 +86,11 @@ go runtime + seu código = binário
   - Adicionar quantidades de tarefas/operações;
   - Informar que você terminou uma tarefa/operação;
   - Aguardar a finalização de todas as tarefas/operações.
+- **Channels**: comunicação entre goroutines
+- Segurança para uma thread saber o momento em que ela pode trabalhar com um determinado dado
+- Esperar até que as operações sejam concluídas
+  - `make(chan tipo)`: cria um canal
+  - `canal <- valor`: envia um valor para o canal
+  - `valor := <- canal`: recebe um valor do canal
+  - `close(canal)`: fecha o canal
+  - `range canal`: itera sobre os valores do canal
