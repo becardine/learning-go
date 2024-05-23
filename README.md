@@ -94,3 +94,8 @@ go runtime + seu código = binário
   - `valor := <- canal`: recebe um valor do canal
   - `close(canal)`: fecha o canal
   - `range canal`: itera sobre os valores do canal
+
+### Eventos
+
+- Algo no passado. Exemplo: Inseri o registro -> registro inserido.
+- Evento (Carregar dados) -> operações que são executadas em sequência (Carregar dados -> Salvar dados -> Enviar email) -> Gerenciar os eventos/operações
