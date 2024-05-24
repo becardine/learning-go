@@ -113,6 +113,23 @@ func (suite *EventDispatcherTestSuite) TestEventDispatcher_HasListeners() {
 	assert.False(suite.T(), suite.dispatcher.HasListeners(suite.event.GetName(), &suite.otherHandler))
 }
 
+func (suite *EventDispatcherTestSuite) TestEventDispatcher_Remove() {
+	err := suite.dispatcher.AddListener(suite.event.GetName(), &suite.handler)
+	assert.Nil(suite.T(), err)
+	assert.Len(suite.T(), suite.dispatcher.handlers[suite.event.GetName()], 1)
+
+	err = suite.dispatcher.AddListener(suite.event.GetName(), &suite.anotherHandler)
+	assert.Nil(suite.T(), err)
+	assert.Len(suite.T(), suite.dispatcher.handlers[suite.event.GetName()], 2)
+
+	suite.dispatcher.RemoveListener(suite.event.GetName(), &suite.handler)
+	assert.Len(suite.T(), suite.dispatcher.handlers[suite.event.GetName()], 1)
+	assert.Equal(suite.T(), &suite.anotherHandler, suite.dispatcher.handlers[suite.event.GetName()][0])
+
+	suite.dispatcher.RemoveListener(suite.event.GetName(), &suite.anotherHandler)
+	assert.Len(suite.T(), suite.dispatcher.handlers[suite.event.GetName()], 0)
+}
+
 type MockHandler struct {
 	mock.Mock
 }
