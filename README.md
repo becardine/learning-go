@@ -107,6 +107,9 @@ go runtime + seu código = binário
 - **Consumer**: recebe mensagens
 - **Queue**: fila de mensagens
 - **Exchange**: roteamento de mensagens. Tipos: fanout, direct, topic, headers. O producer envia mensagens para o exchange e o exchange envia para a fila.
+  - direct: roteamento para uma fila. precisa de routing key
+  - fanout: roteamento para todas as filas. não precisa de routing key
+  - topic: parecido com o direct, mas com wildcards. precisa de routing key. `*` (uma palavra) e `#` (zero ou mais palavras). Exemplo: `*.amarelo.*` ou `#`
 - **Binding**: regras de roteamento
 - **Connection**: conexão com o broker
 - **Channel**: canal de comunicação
@@ -123,10 +126,6 @@ go runtime + seu código = binário
 - **Auto Delete**: fila excluída automaticamente
 - **Binding Key**: chave de roteamento
 - **Routing Key**: chave de roteamento
-- **Fanout**: roteamento para todas as filas
-- **Direct**: roteamento para uma fila
-- **Topic**: roteamento por padrão
-- **Header**: roteamento por cabeçalho
 - **RPC**: chamada de procedimento remoto
 - **Pub/Sub**: publicar/assinar
 - **Message**: mensagem
