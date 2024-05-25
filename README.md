@@ -99,3 +99,50 @@ go runtime + seu código = binário
 
 - Algo no passado. Exemplo: Inseri o registro -> registro inserido.
 - Evento (Carregar dados) -> operações que são executadas em sequência (Carregar dados -> Salvar dados -> Enviar email) -> Gerenciar os eventos/operações
+
+### RabbitMQ
+
+- **Message Broker**: intermediário de mensagens
+- **Producer**: envia mensagens
+- **Consumer**: recebe mensagens
+- **Queue**: fila de mensagens
+- **Exchange**: roteamento de mensagens. Tipos: fanout, direct, topic, headers. O producer envia mensagens para o exchange e o exchange envia para a fila.
+- **Binding**: regras de roteamento
+- **Connection**: conexão com o broker
+- **Channel**: canal de comunicação
+- **Delivery**: mensagem entregue
+- **Acknowledge**: confirmação de entrega
+- **Requeue**: reenviar mensagem
+- **Dead Letter Exchange**: troca de mensagens mortas
+- **Dead Letter Queue**: fila de mensagens mortas
+- **Prefetch**: quantidade de mensagens pré-carregadas
+- **QoS**: qualidade de serviço
+- **Durable**: mensagens persistentes
+- **Transient**: mensagens não persistentes
+- **Exclusive**: fila exclusiva
+- **Auto Delete**: fila excluída automaticamente
+- **Binding Key**: chave de roteamento
+- **Routing Key**: chave de roteamento
+- **Fanout**: roteamento para todas as filas
+- **Direct**: roteamento para uma fila
+- **Topic**: roteamento por padrão
+- **Header**: roteamento por cabeçalho
+- **RPC**: chamada de procedimento remoto
+- **Pub/Sub**: publicar/assinar
+- **Message**: mensagem
+- **Payload**: carga útil
+- **Broker**: intermediário
+- **Cluster**: agrupamento
+- **Shovel**: transferência de mensagens
+- **Federation**: federação de mensagens
+- **Management Plugin**: plugin de gerenciamento
+- **Stomp**: protocolo de mensagens
+- **Web STOMP**: protocolo de mensagens via web
+- **AMQP**: protocolo de mensagens avançado
+- **STOMP**: protocolo de mensagens simples
+- **MQTT**: protocolo de mensagens para IoT
+- **WebSocket**: protocolo de comunicação
+- **TLS**: segurança de transporte
+- **SSL**: segurança de transporte
+- **SASL**: camada de segurança
+- **OAuth**: autenticação
