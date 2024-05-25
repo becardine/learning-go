@@ -14,7 +14,7 @@ func main() {
 	}
 	defer ch.Close()
 	out := make(chan amqp.Delivery)
-	go rabbitmq.Consume(ch, out)
+	go rabbitmq.Consume(ch, out, "queue")
 	for m := range out {
 		fmt.Println(string(m.Body))
 		m.Ack(false) // acknowledge the message to rabbitmq
