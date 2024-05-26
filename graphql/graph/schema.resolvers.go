@@ -6,7 +6,6 @@ package graph
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/becardine/learning-go/graphql/graph/model"
 )
@@ -27,7 +26,16 @@ func (r *mutationResolver) CreateCategory(ctx context.Context, input model.Creat
 
 // CreateCourse is the resolver for the createCourse field.
 func (r *mutationResolver) CreateCourse(ctx context.Context, input model.CreateCourseInput) (*model.Course, error) {
-	panic(fmt.Errorf("not implemented: CreateCourse - createCourse"))
+	course, err := r.CourseDB.Create(input.Name, *input.Description, input.CategoryID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &model.Course{
+		ID:          course.ID,
+		Name:        course.Name,
+		Description: &course.Description,
+	}, nil
 }
 
 // Categories is the resolver for the categories field.
@@ -51,7 +59,21 @@ func (r *queryResolver) Categories(ctx context.Context) ([]*model.Category, erro
 
 // Courses is the resolver for the courses field.
 func (r *queryResolver) Courses(ctx context.Context) ([]*model.Course, error) {
-	panic(fmt.Errorf("not implemented: Courses - courses"))
+	courses, err := r.CourseDB.FindAll()
+	if err != nil {
+		return nil, err
+	}
+
+	var result []*model.Course
+	for _, course := range courses {
+		result = append(result, &model.Course{
+			ID:          course.ID,
+			Name:        course.Name,
+			Description: &course.Description,
+		})
+	}
+
+	return result, nil
 }
 
 // Mutation returns MutationResolver implementation.
