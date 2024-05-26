@@ -1,6 +1,6 @@
 # Where are all the schema files located? globs are supported eg  src/**/*.graphqls
 schema:
-  - graph/*.graphqls
+- graph/*.graphqls
 
 # Where should the generated server code go?
 exec:
@@ -24,7 +24,7 @@ resolver:
   package: graph
   filename_template: "{name}.resolvers.go"
   # Optional: turn on to not generate template comments above resolvers
-  # omit_template_comment: false
+# omit_template_comment: false
 
 # Optional: turn on use ` + "`" + `gqlgen:"fieldName"` + "`" + ` tags in your models
 # struct_tag: json
@@ -74,14 +74,20 @@ autobind:
 # modelgen, the others will be allowed when binding to fields. Configure them to
 # your liking
 models:
+  Category:
+    model:
+    - "github.com/becardine/learning-go/graphql/graph/model.Category"
+  Course:
+    model:
+    - "github.com/becardine/learning-go/graphql/graph/model.Course"
   ID:
     model:
-      - github.com/99designs/gqlgen/graphql.ID
-      - github.com/99designs/gqlgen/graphql.Int
-      - github.com/99designs/gqlgen/graphql.Int64
-      - github.com/99designs/gqlgen/graphql.Int32
+    - github.com/99designs/gqlgen/graphql.ID
+    - github.com/99designs/gqlgen/graphql.Int
+    - github.com/99designs/gqlgen/graphql.Int64
+    - github.com/99designs/gqlgen/graphql.Int32
   Int:
     model:
-      - github.com/99designs/gqlgen/graphql.Int
-      - github.com/99designs/gqlgen/graphql.Int64
-      - github.com/99designs/gqlgen/graphql.Int32
+    - github.com/99designs/gqlgen/graphql.Int
+    - github.com/99designs/gqlgen/graphql.Int64
+    - github.com/99designs/gqlgen/graphql.Int32
