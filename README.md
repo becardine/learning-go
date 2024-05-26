@@ -67,6 +67,7 @@
 - `GOOS=darwin GOARCH=amd64 go build main.go`: compila para macOS
 - `go mod init github.com/username/repo`: cria um arquivo go.mod
 - `go mod tidy`: remove dependências não utilizadas ou adiciona dependências necessárias, alternativa ao `go get`
+- `go mod vendor`: cria uma pasta `vendor` com as dependências do projeto
 - `go.sum`: arquivo que contém as dependências do projeto e suas versões exatas, através do hash SHA-256 de cada pacote e versão baixada do repositório de origem.
 - `go mod edit -replace github.com/username/repo@v1.0.0=github.com/username/repo@v1.1.0`: substitui uma dependência por outra (local pode ser usado para substituir um pacote remoto por um local, mas produção não é recomendado)
 - `go work init`: cria um módulo de trabalho (não é recomendado para projetos que serão compartilhados)
