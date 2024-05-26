@@ -146,3 +146,9 @@ go runtime + seu código = binário
 - **SSL**: segurança de transporte
 - **SASL**: camada de segurança
 - **OAuth**: autenticação
+
+### GraphQL for Go
+
+- [gqlgen](https://gqlgen.com/): gerador de código GraphQL
+- `printf '//go:build tools\npackage tools\nimport (_ "github.com/99designs/gqlgen"\n _ "github.com/99designs/gqlgen/graphql/introspection")' | gofmt > tools.go`: cria um arquivo `tools.go` para instalar as ferramentas do gqlgen
+- `go run github.com/99designs/gqlgen init`: inicializa o gqlgen
