@@ -152,3 +152,5 @@ go runtime + seu código = binário
 - [gqlgen](https://gqlgen.com/): gerador de código GraphQL
 - `printf '//go:build tools\npackage tools\nimport (_ "github.com/99designs/gqlgen"\n _ "github.com/99designs/gqlgen/graphql/introspection")' | gofmt > tools.go`: cria um arquivo `tools.go` para instalar as ferramentas do gqlgen
 - `go run github.com/99designs/gqlgen init`: inicializa o gqlgen
+- `go run github.com/99designs/gqlgen generate`: gera o código GraphQL
+- Resolver: função que executa a lógica de uma query ou mutation
