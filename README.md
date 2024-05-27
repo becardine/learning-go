@@ -206,3 +206,25 @@ message SearchRequest {
 - **gRPC - API "bidirectional streaming"**
   - Cliente e servidor enviam uma sequência de mensagens
   - Exemplo: `Bidirectional Streaming RPC` (Cliente <-> Servidor)
+
+### REST vs gRPC
+
+| Característica      | REST                   | gRPC                       |
+| ------------------- | ---------------------- | -------------------------- |
+| Protocolo           | HTTP/1.1               | HTTP/2                     |
+| Formato de mensagem | JSON, XML              | Protocol Buffers           |
+| Verbos              | GET, POST, PUT, DELETE | RPC                        |
+| Stateless           | Sim                    | Sim                        |
+| Cache               | Sim                    | Sim                        |
+| Segurança           | HTTPS, OAuth           | TLS                        |
+| Ferramentas         | Postman, Swagger       | gRPC CLI                   |
+| Comunicação         | Síncrona               | Síncrona e Assíncrona      |
+| Comunicação         | Unidirecional          | Bidirecional               |
+| Performance         | Mais lenta             | Mais rápida                |
+| Comunicação         | HTTP/1.1               | HTTP/2                     |
+| Comunicação         | Texto                  | Binário                    |
+| Comunicação         | JSON                   | Protocol Buffers           |
+| Comunicação         | -                      | Streaming                  |
+| Comunicação         | -                      | Multiplexação              |
+| Comunicação         | -                      | Cabeçalhos comprimidos     |
+| Comunicação         | -                      | Priorização de requisições |
