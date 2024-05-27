@@ -172,6 +172,7 @@ go runtime + seu código = binário
   - Menos tráfego de rede
   - Processo mais rápido
 - Sintaxe: segue um contrato. os números são referentes a ordem dos campos para controle interno do protocol buffer
+- `protoc --go_out=. --go-grpc_out=. proto/entities.proto`: gera o código Go e gRPC
 
 ```proto3
 syntax = "proto3";
