@@ -154,3 +154,55 @@ go runtime + seu código = binário
 - `go run github.com/99designs/gqlgen init`: inicializa o gqlgen
 - `go run github.com/99designs/gqlgen generate`: gera o código GraphQL
 - Resolver: função que executa a lógica de uma query ou mutation
+
+### gRPC
+
+- [gRPC](https://grpc.io/): framework RPC de alto desempenho. Desenvolvido pela Google, para facilitar a comunicação entre serviços independente da linguagem de programação.
+- Faz parte do CNCF (Cloud Native Computing Foundation)
+- Ideal para comunicação entre microserviços
+- Mobile, Backend
+- Geração de forma automática de código
+- Streaming bidirecional usando HTTP/2
+- Linguagens com suporte oficial: gRPC-GO, gRPC-JAVA, gRPC-C -> C++, Phyton, Ruby, Objective C, PHP, C#, Node.js, Dart, Kotlin/JVM
+- Remote Procedure Call (RPC): chamada de procedimento remoto
+- Protocol buffers: serialização de dados (pense em um XML, porém mais rápido e eficiente)
+- Protocol Buffers vs JSON
+  - Arquivo binário < JSON
+  - Serialização e desserialização mais rápidas e mais leves
+  - Menos tráfego de rede
+  - Processo mais rápido
+- Sintaxe: segue um contrato. os números são referentes a ordem dos campos para controle interno do protocol buffer
+
+```proto3
+syntax = "proto3";
+
+message SearchRequest {
+  string query = 1;
+  int32 page_number = 2;
+  int32 result_per_page = 3;
+}
+
+```
+
+- HTTP/2: multiplexação, cabeçalhos comprimidos, priorização de requisições, push de servidor para cliente
+- Nasceu como SPDY (Google) e foi padronizado como HTTP/2
+- Lançado em 2015
+- Dados trafegados são binários e não textuais como no HTTP/1.1
+- Utiliza a mesma conexão TCP para várias requisições (Multiplex)
+- Server Push: servidor envia recursos para o cliente antes mesmo dele solicitar
+- Cabeçalhos comprimidos: HPACK
+- Gasta menos recursos de rede e processamento
+
+- **gRPC - API "unary"**
+  - Chamada de procedimento remoto
+  - Cliente envia uma requisição e o servidor responde
+  - Exemplo: `Unary RPC` (Cliente -> Servidor)
+- **gRPC - API "server streaming"**
+  - Cliente envia uma requisição e o servidor responde com uma sequência de mensagens
+  - Exemplo: `Server Streaming RPC` (Cliente -> Servidor)
+- **gRPC - API "client streaming"**
+  - Cliente envia uma sequência de mensagens e o servidor responde
+  - Exemplo: `Client Streaming RPC` (Cliente <- Servidor)
+- **gRPC - API "bidirectional streaming"**
+  - Cliente e servidor enviam uma sequência de mensagens
+  - Exemplo: `Bidirectional Streaming RPC` (Cliente <-> Servidor)
