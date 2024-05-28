@@ -26,6 +26,8 @@ message CategoryGetRequest {
 
 service CategoryService {
     rpc CreateCategory(CreateCategoryRequest) returns (CategoryResponse) {}
+    rpc CreateCategoryStream(stream CreateCategoryRequest) returns (CategoryList) {}
+    rpc CreateCategoryStreamBidirectional(stream CreateCategoryRequest) returns (stream Category) {}
     rpc ListCategories(blank) returns (CategoryList) {}
     rpc GetCategory(CategoryGetRequest) returns (CategoryResponse) {}
 }
