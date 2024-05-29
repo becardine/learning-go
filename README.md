@@ -245,4 +245,5 @@ message SearchRequest {
 
 - [golang-migrate/migrate](github.com/golang-migrate/migrate) é uma ferramenta para gerenciar migrações de banco de dados
 - `migrate create -ext sql -dir migrations -seq nome-da-migracao`: cria uma migração
--
+- `migrate -path migrations -database "mysql://root:root@tcp(localhost:3306)/sqlc?query" up`: executa as migrações
+- `migrate -path migrations -database "mysql://root:root@tcp(localhost:3306)/sqlc?query" down`: reverte as migrações
