@@ -229,3 +229,14 @@ message SearchRequest {
 | Comunicação         | -                      | Multiplexação              |
 | Comunicação         | -                      | Cabeçalhos comprimidos     |
 | Comunicação         | -                      | Priorização de requisições |
+
+### cobra-cli
+
+- [cobra-cli](github.com/spf13/cobra-cli) é uma ferramenta CLI para criar projetos com Cobra
+- `cobra-cli init nome-do-projeto`: inicializa o projeto
+- `cobra-cli add nome-do-comando`: adiciona um comando
+- `cobra-cli add nome-do-comando --type=local`: adiciona um comando local
+- `cobra-cli add nome-do-comando --type=alias`: adiciona um comando de alias
+- `cobra-cli add nome-do-comando --type=parent`: adiciona um comando pai
+- persistent flags: flags que são passadas para todos os comandos
+- local flags: flags que são passadas apenas para o comando
