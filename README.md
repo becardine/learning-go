@@ -240,3 +240,9 @@ message SearchRequest {
 - `cobra-cli add nome-do-comando --type=parent`: adiciona um comando pai
 - persistent flags: flags que são passadas para todos os comandos
 - local flags: flags que são passadas apenas para o comando
+
+### Migrations
+
+- [golang-migrate/migrate](github.com/golang-migrate/migrate) é uma ferramenta para gerenciar migrações de banco de dados
+- `migrate create -ext sql -dir migrations -seq nome-da-migracao`: cria uma migração
+-
