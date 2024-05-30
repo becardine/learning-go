@@ -247,3 +247,6 @@ message SearchRequest {
 - `migrate create -ext sql -dir migrations -seq nome-da-migracao`: cria uma migração
 - `migrate -path migrations -database "mysql://root:root@tcp(localhost:3306)/sqlc?query" up`: executa as migrações
 - `migrate -path migrations -database "mysql://root:root@tcp(localhost:3306)/sqlc?query" down`: reverte as migrações
+- sqlx: extensão do pacote `database/sql` que facilita a execução de queries
+- sqlc: gerador de código SQL para Go
+- instalação: `go get github.com/kyleconroy/sqlc/cmd/sqlc`
