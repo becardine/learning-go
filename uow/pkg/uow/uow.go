@@ -16,3 +16,24 @@ type UowInterface interface {
 	Rollback() error
 	UnRegister(name string)
 }
+
+type Uow struct {
+	Db           *sql.DB
+	Tx           *sql.Tx
+	Repositories map[string]RepositoryFactory
+}
+
+func NewUow(ctx context.Context, db *sql.DB) *Uow {
+	return &Uow{
+		Db:           db,
+		Repositories: make(map[string]RepositoryFactory),
+	}
+}
+
+func (u *Uow) Register(name string, fc RepositoryFactory) {
+	u.Repositories[name] = fc
+}
+
+func (u *Uow) UnRegister(name string) {
+	delete(u.Repositories, name)
+}
