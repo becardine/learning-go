@@ -24,48 +24,43 @@ func NewAddCourseUseCaseUow(uow uow.UowInterface) *AddCourseUseCaseUow {
 	}
 }
 
-func (a *AddCourseUseCaseUow) ExecuteUow(ctx context.Context, input InputUseCase) error {
+func (a *AddCourseUseCaseUow) Execute(ctx context.Context, input InputUseCase) error {
 	return a.Uow.Do(ctx, func(uow *uow.Uow) error {
-		// tudo que for executado aqui dentro será uma transação com begin e commit/rollback
 		category := entity.Category{
 			Name: input.CategoryName,
 		}
-
-		categoryRepository := a.getCategoryRepository(ctx)
-		err := categoryRepository.Insert(ctx, category)
+		repoCategory := a.getCategoryRepository(ctx)
+		err := repoCategory.Insert(ctx, category)
 		if err != nil {
 			return err
 		}
 
 		course := entity.Course{
 			Name:       input.CourseName,
-			CategoryID: category.ID,
+			CategoryID: input.CourseCategoryID,
 		}
 
-		courseRepository := a.getCourseRepository(ctx)
-		err = courseRepository.Insert(ctx, course)
+		repoCourse := a.getCourseRepository(ctx)
+		err = repoCourse.Insert(ctx, course)
 		if err != nil {
 			return err
 		}
-
 		return nil
 	})
 }
 
 func (a *AddCourseUseCaseUow) getCategoryRepository(ctx context.Context) repository.CategoryRepositoryInterface {
-	categoryRepository, err := a.Uow.GetRepository(ctx, "CategoryRepository")
+	repo, err := a.Uow.GetRepository(ctx, "CategoryRepository")
 	if err != nil {
 		panic(err)
 	}
-
-	return categoryRepository.(repository.CategoryRepositoryInterface)
+	return repo.(repository.CategoryRepositoryInterface)
 }
 
 func (a *AddCourseUseCaseUow) getCourseRepository(ctx context.Context) repository.CourseRepositoryInterface {
-	courseRepository, err := a.Uow.GetRepository(ctx, "CourseRepository")
+	repo, err := a.Uow.GetRepository(ctx, "CourseRepository")
 	if err != nil {
 		panic(err)
 	}
-
-	return courseRepository.(repository.CourseRepositoryInterface)
+	return repo.(repository.CourseRepositoryInterface)
 }
