@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"database/sql"
+	"fmt"
 
 	"github.com/becardine/learning-go/sqlc/internal/db"
 	_ "github.com/go-sql-driver/mysql"
@@ -28,11 +29,11 @@ func main() {
 	// 	panic(err)
 	// }
 
-	err = queries.UpdateCategory(ctx, db.UpdateCategoryParams{
-		ID:          "5f421ec2-39fb-4df0-8e55-dffcca081739",
-		Name:        "Backend updated",
-		Description: sql.NullString{String: "Backend description updated", Valid: true},
-	})
+	// err = queries.UpdateCategory(ctx, db.UpdateCategoryParams{
+	// 	ID:          "5f421ec2-39fb-4df0-8e55-dffcca081739",
+	// 	Name:        "Backend updated",
+	// 	Description: sql.NullString{String: "Backend description updated", Valid: true},
+	// })
 
 	categories, err := queries.ListCategories(ctx)
 	if err != nil {
@@ -41,5 +42,15 @@ func main() {
 
 	for _, category := range categories {
 		println(category.ID, category.Name, category.Description.String)
+	}
+
+	courses, err := queries.ListCourses(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	for _, course := range courses {
+		fmt.Printf("Category: %s, Course Id: %s, Course Name: %s, Course Description: %s\n",
+			course.CategoryName, course.ID, course.Name, course.Description.String)
 	}
 }
