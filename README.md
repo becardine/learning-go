@@ -250,3 +250,10 @@ message SearchRequest {
 - sqlx: extensão do pacote `database/sql` que facilita a execução de queries
 - sqlc: gerador de código SQL para Go
 - instalação: `go get github.com/kyleconroy/sqlc/cmd/sqlc`
+- sqlc sempre que tiver uma coluna do tipo decimal, ele vai salvar como string, para corrigir isso, é necessário adicionar um override no arquivo `sqlc.yaml`, exemplo:
+  ```yaml
+  overrides:
+    - db_type: 'decimal'
+      go_type: 'float64'
+  ```
+- `sqlc generate`: gera o código SQL
