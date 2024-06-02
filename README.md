@@ -257,3 +257,93 @@ message SearchRequest {
       go_type: 'float64'
   ```
 - `sqlc generate`: gera o código SQL
+
+### UOW - Unit of Work
+
+- **Unit of Work**: unidade de trabalho que agrupa todas as operações de um banco de dados em uma única transação
+- **Repository**: camada de abstração que isola a lógica de negócio da lógica de acesso a dados
+- **Service**: camada de abstração que isola a lógica de negócio da lógica de acesso a dados
+- **Model**: estrutura de dados que representa uma entidade do banco de dados
+- **Controller**: camada de abstração que recebe as requisições HTTP e chama os serviços
+- **Handler**: camada de abstração que recebe as requisições HTTP e chama os serviços
+- **Middleware**: intercepta as requisições HTTP e executa uma lógica antes de passar para o próximo handler
+- **Context**: passa valores entre os middlewares e handlers
+- **Error Handling**: tratamento de erros
+- **Logger**: registra as requisições HTTP
+- **Config**: configurações do projeto
+- **Docker**: containerização
+- **Docker Compose**: orquestração de containers
+- **Makefile**: automatiza tarefas
+- **Testes**: testes unitários e de integração
+- **Mock**: simula o comportamento de uma dependência
+- **Dockerfile**: arquivo de configuração do Docker
+
+### DI - Dependency Injection
+
+- **Dependency Injection**: técnica de injeção de dependências
+- **Container**: armazena as dependências e resolve as dependências
+- [FX](github.com/uber-go/fx): framework de injeção de dependências
+  - `fx.New()`: cria um novo container
+  - Utiliza reflection para injetar as dependências
+- [Wire](github.com/google/wire): gerador de código para injeção de dependências
+  - `wire`: gera o código de injeção de dependências
+  - Não utiliza reflection
+  - `go install github.com/google/wire/cmd/wire@latest`: instala o wire
+  - `go run main.go wire_gen.go`: rodar a aplicação junto com o wire
+
+### Clean Architecture
+
+- Arquitetura de software que separa as responsabilidades em camadas
+- Termo criado por Robert C. Martin (Uncle Bob) em 2012
+- Livro "Clean Architecture: A Craftsman's Guide to Software Structure and Design" (2017)
+  - Curiosidades do livro:
+    - ele fala especificamente sobre "Clean Architecture" somente em 7 páginas do livro
+    - tudo que ele fala sobre "Clean Architecture" está literalmente em um artigo do blog dele
+- Buzz word no mundo do desenvolvimento de software
+- Proteção do domínio da aplicação
+- Baixo acoplamento entre as camadas (limites arquiteturais)
+- Orientada a casos de uso (use cases)
+
+  - Use Cases: regras de negócio da aplicação
+
+- **Pontos sobre arquitetura:**
+
+  - formato que o software terá
+  - divisão de componentes
+  - comunicação entre componentes
+  - uma boa arquitetura vai facilitar o processo de desenvolvimento, deploy e manutenção
+  - "The strategy behind that facilitation is to leave as many options opem as possible for as long as possible" - Uncle Bob
+
+- **Objetivos de uma boa arquitetura:**
+
+  - "o objetivo principal da arquitetura é dar suporte ao ciclo de vida do sistema. Uma boa arquitetura torna o sistema fácil de entender, fácil de desenvolver, fácil de manter e fácil de implantar. O objetivo final é minimizar o custo de vida útil do sistema e maximizar a produtividade do programador." - Uncle Bob
+
+```
+ "Keep options open" - Uncle Bob
+```
+
+### Regras vs Detalhes
+
+- Regras de negócio trazem o real valor para o software
+- Detalhes ajudam a suportar as regras de negócio
+- Detalhes não devem impactar as regras de negócio
+- Frameworks, banco de dados, apis, não devem impactar as regras de negócio
+
+```
+Atacar a complexidade no coração do software (DDD)
+```
+
+### Use Cases
+
+- Intenção de uma ação do usuário
+- Clareza de cada comportamento do sistema
+- Detalhes não devem impactar as regra de negócio
+
+#### Use Cases vs SRP (Single Responsibility Principle)
+
+- Temos a tendência de "reaproveitar" use cases por serem muitos parecidos
+- Ex: Alterar vs Inserir. Ambos consultam se o registro existe, persistem dados. Mas são use cases diferentes. Por quê?
+
+  - **Alterar**: verifica se o registro existe, persiste os dados
+  - **Inserir**: não verifica se o registro existe, persiste os dados
+  - **SRP**: mudam por razões diferentes, logo são responsabilidades diferentes
