@@ -338,6 +338,7 @@ Atacar a complexidade no coração do software (DDD)
 - Intenção de uma ação do usuário
 - Clareza de cada comportamento do sistema
 - Detalhes não devem impactar as regra de negócio
+- Use cases contam uma história
 
 #### Use Cases vs SRP (Single Responsibility Principle)
 
@@ -347,3 +348,20 @@ Atacar a complexidade no coração do software (DDD)
   - **Alterar**: verifica se o registro existe, persiste os dados
   - **Inserir**: não verifica se o registro existe, persiste os dados
   - **SRP**: mudam por razões diferentes, logo são responsabilidades diferentes
+
+### Limites Arquiteturais
+
+- Tudo que não impacta diretamente as regras de negócio deve estar em um limite arquitetural diferente. Ex: Não será o frontend, bando de dados que mudarão as regras de negócio da aplicação.
+
+#### Input vs Output
+
+- Tudo se resume a um Input que retorna um Output
+- Ex: Criar um pedido (dados do pedido = input) -> Pedido criado (output)
+- Simplifique seu raciocínio ao criar um software sempre pensando em Input e Output
+
+### DTO - Data Transfer Object
+
+- Trafegar dados entre os limites arquiteturais
+- Não possuem regras de negócio
+- Objeto anêmico, sem comportamento
+- Não faz nada, apenas transporta dados
