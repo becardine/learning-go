@@ -365,3 +365,6 @@ Atacar a complexidade no coração do software (DDD)
 - Não possuem regras de negócio
 - Objeto anêmico, sem comportamento
 - Não faz nada, apenas transporta dados
+- API -> Controller -> Use Case -> Entity
+  - Controller cria um DTO e passa para o Use Case
+  - Use case executa o fluxo, pega o resultado, cria um DTO para output e passa para o Controller
