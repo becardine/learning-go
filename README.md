@@ -368,3 +368,26 @@ Atacar a complexidade no coração do software (DDD)
 - API -> Controller -> Use Case -> Entity
   - Controller cria um DTO e passa para o Use Case
   - Use case executa o fluxo, pega o resultado, cria um DTO para output e passa para o Controller
+
+### Presenters
+
+- Objetos de transformação
+- Adequa o DTO de output para o formato que o cliente deseja
+- Um sistema pode ter diversos formatos de entrega: ex: JSON, XML, HTML, etc
+
+```go
+  input = new CategoryInputDto("name")
+  output = CreateCategoryUseCase(input)
+  jsonResult = CategoryPresenter(output).ToJson()
+  xmlResult = CategoryPresenter(output).ToXml()
+```
+
+### Entities
+
+- Entities da Clean Architecture são diferentes das Entities do DDD
+- Entities da Clean Architecture são camadas de regras de negócio
+- Elas se aplicam em qualquer situação
+- Não há definição explicita de como criar uma Entity
+- Normalmente utilizamos táticas do DDD para criar Entities
+- Entities = Agregados + Domain Services
+-
